@@ -1,0 +1,25 @@
+<header class="app-header border-bottom">
+  <nav class="navbar navbar-expand-lg container py-3">
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/patients">
+      <span class="brand-mark" aria-hidden="true">+</span>
+      <span>Patient Management</span>
+    </a>
+    <div class="ms-auto">
+      <a
+        class="nav-link px-3"
+        routerLink="/patients"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Patients
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <router-outlet />
+</main>
+
+<footer class="container py-4 text-center text-secondary small">
+  Angular 21 · ASP.NET Core Web API · FHIR
+</footer>

@@ -1,0 +1,137 @@
+<div class="container py-4 py-lg-5">
+  <a class="back-link" routerLink="/patients">← Back to patients</a>
+
+  @if (loading()) {
+    <div class="card app-card border-0 mt-4 p-5 text-center">
+      <div class="spinner-border text-primary mx-auto" role="status">
+        <span class="visually-hidden">Loading patient details</span>
+      </div>
+      <p class="text-secondary mt-3 mb-0">Loading patient details…</p>
+    </div>
+  } @else if (errorMessage()) {
+    <div class="alert alert-danger mt-4" role="alert">{{ errorMessage() }}</div>
+  } @else if (patient(); as patient) {
+    <section class="patient-banner mt-4">
+      <div class="row align-items-center g-4">
+        <div class="col-auto">
+          <div class="detail-avatar" aria-hidden="true">{{ patient.fullName.charAt(0) }}</div>
+        </div>
+        <div class="col">
+          <span class="eyebrow">Patient demographics</span>
+          <h1 class="h2 mb-1">{{ patient.fullName }}</h1>
+          <div class="text-secondary">Patient ID: {{ patient.patientId }}</div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-3">
+        <div class="col-sm-6 col-lg-3">
+          <div class="demographic-item">
+            <span>Gender</span>
+            <strong>{{ patient.gender | titlecase }}</strong>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="demographic-item">
+            <span>Date of birth</span>
+            <strong>{{ patient.dateOfBirth ? (patient.dateOfBirth | date: 'MMMM d, y') : 'Not recorded' }}</strong>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="demographic-item">
+            <span>Phone number</span>
+            <strong>{{ patient.phoneNumber || 'Not recorded' }}</strong>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="demographic-item">
+            <span>Status</span>
+            <strong><span class="status-dot"></span> Active record</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Latest observations</span>
+          <h2 class="h4 mb-0">Vital signs</h2>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-1">
+        @for (card of vitalCards; track card.key) {
+          <div class="col-sm-6 col-lg-3">
+            <div class="vital-card h-100">
+              <div class="vital-symbol">{{ card.symbol }}</div>
+              <div>
+                <div class="vital-label">{{ card.label }}</div>
+                <div class="vital-value">{{ patient.vitals[card.key] || 'Not recorded' }}</div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <div class="row g-4 mt-1">
+      <section class="col-xl-6">
+        <div class="card app-card border-0 h-100 overflow-hidden">
+          <div class="card-body p-4 border-bottom">
+            <span class="eyebrow">Clinical history</span>
+            <h2 class="h4 mb-0">Active conditions</h2>
+          </div>
+          @if (patient.activeConditions.length === 0) {
+            <div class="empty-section">No active conditions are recorded.</div>
+          } @else {
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr><th>Condition</th><th>Code</th><th>Recorded</th></tr>
+                </thead>
+                <tbody>
+                  @for (condition of patient.activeConditions; track condition.code + condition.recordedDate) {
+                    <tr>
+                      <td class="fw-semibold">{{ condition.displayName || 'Unnamed condition' }}</td>
+                      <td><code>{{ condition.code || '—' }}</code></td>
+                      <td>{{ condition.recordedDate ? (condition.recordedDate | date: 'MMM d, y') : '—' }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="col-xl-6">
+        <div class="card app-card border-0 h-100 overflow-hidden">
+          <div class="card-body p-4 border-bottom">
+            <span class="eyebrow">Current treatment</span>
+            <h2 class="h4 mb-0">Active medications</h2>
+          </div>
+          @if (patient.activeMedications.length === 0) {
+            <div class="empty-section">No active medications are recorded.</div>
+          } @else {
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr><th>Medication</th><th>Dosage</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  @for (medication of patient.activeMedications; track medication.medicationName + medication.dosageInstruction) {
+                    <tr>
+                      <td class="fw-semibold">{{ medication.medicationName || 'Unnamed medication' }}</td>
+                      <td>{{ medication.dosageInstruction || '—' }}</td>
+                      <td><span class="status-badge">{{ medication.status || 'Unknown' }}</span></td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</div>

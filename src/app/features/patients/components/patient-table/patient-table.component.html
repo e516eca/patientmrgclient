@@ -1,0 +1,81 @@
+<div class="table-responsive">
+  <table class="table align-middle mb-0 patient-table">
+    <thead>
+      <tr>
+        <th scope="col">Patient</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Date of birth</th>
+        <th scope="col">Phone</th>
+        <th scope="col" class="text-end">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (loading()) {
+        @for (row of [1, 2, 3, 4, 5]; track row) {
+          <tr>
+            <td colspan="5"><div class="loading-row"></div></td>
+          </tr>
+        }
+      } @else if (patients().length === 0) {
+        <tr>
+          <td colspan="5" class="text-center py-5">
+            <div class="empty-icon" aria-hidden="true">⌕</div>
+            <h3 class="h6 mt-3 mb-1">{{ hasFilter() ? 'No matching patients' : 'No patients found' }}</h3>
+            <p class="text-secondary mb-0">
+              {{ hasFilter() ? 'Try a different name.' : 'Create the first patient record.' }}
+            </p>
+          </td>
+        </tr>
+      } @else {
+        @for (patient of patients(); track patient.patientId) {
+          <tr
+            class="patient-row"
+            tabindex="0"
+            (click)="viewPatient.emit(patient)"
+            (keydown.enter)="viewPatient.emit(patient)">
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <div class="patient-avatar" aria-hidden="true">
+                  {{ patient.givenName.charAt(0) || patient.fullName.charAt(0) }}{{ patient.familyName.charAt(0) }}
+                </div>
+                <div>
+                  <div class="patient-name">{{ patient.fullName }}</div>
+                  <div class="patient-id">ID: {{ patient.patientId || 'Not supplied' }}</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="gender-badge">{{ patient.gender | titlecase }}</span></td>
+            <td>{{ patient.dateOfBirth ? (patient.dateOfBirth | date: 'MMM d, y') : '—' }}</td>
+            <td>{{ patient.phoneNumber || '—' }}</td>
+            <td class="text-end text-nowrap">
+              <button
+                type="button" 
+                class="btn btn-sm btn-outline-info me-2"
+                (click)="$event.stopPropagation(); summaryPatient.emit(patient)">
+                Get Patient Summary
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary me-2"
+                (click)="$event.stopPropagation(); editPatient.emit(patient)">
+                Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                [disabled]="deletingId() === patient.patientId"
+                (click)="$event.stopPropagation(); deletePatient.emit(patient)">
+                @if (deletingId() === patient.patientId) {
+                  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span class="visually-hidden">Deleting</span>
+                } @else {
+                  Delete
+                }
+              </button>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>

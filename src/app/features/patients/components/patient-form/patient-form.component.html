@@ -1,0 +1,112 @@
+<div class="card app-card border-0">
+  <div class="card-body p-4 p-xl-5">
+    <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
+      <div>
+        <span class="eyebrow">Patient record</span>
+        <h2 class="h4 mb-1">{{ isEditing() ? 'Edit patient' : 'Create patient' }}</h2>
+        <p class="text-secondary mb-0">
+          {{ isEditing() ? 'Update this patient’s FHIR demographics.' : 'Enter the required demographics.' }}
+        </p>
+      </div>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close form"
+        [disabled]="saving()"
+        (click)="cancel()">
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label" for="givenName">Given name</label>
+          <input
+            id="givenName"
+            type="text"
+            class="form-control"
+            formControlName="givenName"
+            autocomplete="given-name"
+            [class.is-invalid]="isInvalid('givenName')">
+          <div class="invalid-feedback">Given name is required.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="familyName">Family name</label>
+          <input
+            id="familyName"
+            type="text"
+            class="form-control"
+            formControlName="familyName"
+            autocomplete="family-name"
+            [class.is-invalid]="isInvalid('familyName')">
+          <div class="invalid-feedback">Family name is required.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="gender">Gender</label>
+          <select
+            id="gender"
+            class="form-select"
+            formControlName="gender"
+            [class.is-invalid]="isInvalid('gender')">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="unknown">Unknown</option>
+          </select>
+          <div class="invalid-feedback">Gender is required.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="dateOfBirth">Date of birth</label>
+          <input
+            id="dateOfBirth"
+            type="date"
+            class="form-control"
+            formControlName="dateOfBirth"
+            [max]="maxBirthDate"
+            [class.is-invalid]="isInvalid('dateOfBirth')">
+          <div class="invalid-feedback">
+            @if (form.controls.dateOfBirth.hasError('futureDate')) {
+              Date of birth cannot be in the future.
+            } @else {
+              Date of birth is required.
+            }
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" for="phoneNumber">Phone number</label>
+          <input
+            id="phoneNumber"
+            type="tel"
+            class="form-control"
+            formControlName="phoneNumber"
+            autocomplete="tel"
+            placeholder="e.g. +1 555 123 4567"
+            [class.is-invalid]="isInvalid('phoneNumber')">
+          <div class="invalid-feedback">Phone number is invalid.</div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          [disabled]="saving()"
+          (click)="cancel()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="saving()">
+          @if (saving()) {
+            <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+            Saving…
+          } @else {
+            {{ isEditing() ? 'Update patient' : 'Create patient' }}
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+@if (totalPages() > 1) {
+  <nav aria-label="Patient table pages">
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item" [class.disabled]="currentPage() === 1">
+        <button class="page-link" type="button" (click)="goTo(currentPage() - 1)">Previous</button>
+      </li>
+
+      @for (page of visiblePages(); track page) {
+        <li class="page-item" [class.active]="page === currentPage()">
+          <button class="page-link" type="button" (click)="goTo(page)">{{ page }}</button>
+        </li>
+      }
+
+      <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+        <button class="page-link" type="button" (click)="goTo(currentPage() + 1)">Next</button>
+      </li>
+    </ul>
+  </nav>
+}

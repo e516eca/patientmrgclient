@@ -1,0 +1,39 @@
+.app-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.navbar-brand {
+  color: var(--pm-navy);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.brand-mark {
+  align-items: center;
+  background: var(--pm-primary);
+  border-radius: 0.65rem;
+  color: #fff;
+  display: inline-flex;
+  font-size: 1.4rem;
+  font-weight: 800;
+  height: 2rem;
+  justify-content: center;
+  line-height: 1;
+  width: 2rem;
+}
+
+.nav-link {
+  border-radius: 0.55rem;
+  color: var(--pm-muted);
+  font-weight: 650;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background: var(--pm-primary-soft);
+  color: var(--pm-primary-dark);
+}

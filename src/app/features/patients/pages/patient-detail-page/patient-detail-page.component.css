@@ -1,0 +1,137 @@
+.back-link {
+  color: var(--pm-primary-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.patient-banner {
+  background:
+    radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.18), transparent 28%),
+    linear-gradient(135deg, #0f3b66, #0866c6);
+  border-radius: 1.25rem;
+  box-shadow: var(--pm-shadow);
+  color: #fff;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.patient-banner .eyebrow,
+.patient-banner .text-secondary {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.detail-avatar {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.17);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  display: flex;
+  font-size: 1.8rem;
+  font-weight: 800;
+  height: 4.5rem;
+  justify-content: center;
+  text-transform: uppercase;
+  width: 4.5rem;
+}
+
+.demographic-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 0.8rem;
+  height: 100%;
+  padding: 0.85rem 1rem;
+}
+
+.demographic-item span:first-child {
+  color: rgba(255, 255, 255, 0.72);
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.demographic-item strong {
+  font-size: 0.92rem;
+}
+
+.status-dot {
+  background: #58e69a;
+  border-radius: 50%;
+  display: inline-block;
+  height: 0.55rem;
+  margin-right: 0.35rem;
+  width: 0.55rem;
+}
+
+.section-heading {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vital-card {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--pm-border);
+  border-radius: 1rem;
+  box-shadow: 0 0.35rem 1rem rgba(16, 42, 67, 0.05);
+  display: flex;
+  gap: 0.9rem;
+  padding: 1rem;
+}
+
+.vital-symbol {
+  align-items: center;
+  background: var(--pm-primary-soft);
+  border-radius: 0.75rem;
+  color: var(--pm-primary-dark);
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+  font-weight: 850;
+  height: 2.7rem;
+  justify-content: center;
+  width: 2.7rem;
+}
+
+.vital-label {
+  color: var(--pm-muted);
+  font-size: 0.75rem;
+}
+
+.vital-value {
+  color: var(--pm-navy);
+  font-weight: 750;
+}
+
+.empty-section {
+  color: var(--pm-muted);
+  padding: 2.5rem;
+  text-align: center;
+}
+
+thead th {
+  background: #f8fafc;
+  color: var(--pm-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.9rem 1rem;
+  text-transform: uppercase;
+}
+
+tbody td {
+  border-color: var(--pm-border);
+  padding: 0.95rem 1rem;
+}
+
+.status-badge {
+  background: #e7f8ef;
+  border-radius: 999px;
+  color: #166534;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+}

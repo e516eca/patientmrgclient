@@ -1,0 +1,25 @@
+.page-hero {
+  background:
+    radial-gradient(circle at 90% 20%, rgba(13, 110, 253, 0.12), transparent 30%),
+    linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--pm-border);
+}
+
+.search-box {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.search-box > span {
+  color: var(--pm-muted);
+  font-size: 1.3rem;
+  left: 0.85rem;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.search-box .form-control {
+  padding-left: 2.5rem;
+}

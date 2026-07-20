@@ -1,0 +1,47 @@
+.app-card {
+  box-shadow: 0 0.75rem 2rem rgba(15, 23, 42, 0.08);
+  border-radius: 1rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+}
+
+.summary-print {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #0f172a;
+}
+
+.report-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #dbe4f0;
+}
+
+.report-body {
+  margin-bottom: 0.75rem;
+}
+
+.report-line {
+  margin-bottom: 0.35rem;
+}
+
+@media print {
+  .btn-outline-secondary {
+    display: none !important;
+  }
+
+  .card {
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+}

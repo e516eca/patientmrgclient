@@ -1,0 +1,39 @@
+<div class="container py-4 py-lg-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <span class="eyebrow">Clinical summary</span>
+      <h1 class="h2 mb-0">Patient summary</h1>
+    </div>
+    <button type="button" class="btn btn-outline-secondary" (click)="closeSummary()">
+      Close and return to Patients list
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="card app-card border-0 p-5 text-center">
+      <div class="spinner-border text-primary mx-auto" role="status">
+        <span class="visually-hidden">Loading patient summary</span>
+      </div>
+      <p class="text-secondary mt-3 mb-0">Loading patient summary…</p>
+    </div>
+  } @else if (errorMessage()) {
+    <div class="alert alert-danger" role="alert">{{ errorMessage() }}</div>
+  } @else {
+    <div class="card app-card border-0 overflow-hidden">
+      <div class="card-body p-4">
+        <div class="summary-print">
+          @for (section of summary(); track section.title) {
+            <section class="mb-4">
+              <h2 class="report-heading">{{ section.title }}</h2>
+              <div class="report-body">
+                @for (line of section.body; track line) {
+                  <p class="report-line">{{ line }}</p>
+                }
+              </div>
+            </section>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>
