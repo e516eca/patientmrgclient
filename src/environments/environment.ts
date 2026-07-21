@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
+  production: true,
   apiBaseUrl: 'https://patientapi-bwacauehgcegbqbx.westus3-01.azurewebsites.net/api'
 };
